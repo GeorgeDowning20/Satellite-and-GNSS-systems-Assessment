@@ -298,3 +298,8 @@ TSWLatexianTemp*
 # option is specified. Footnotes are the stored in a file with suffix Notes.bib.
 # Uncomment the next line to have this generated file ignored.
 #*Notes.bib
+
+
+# git rm -r --cached .;
+# git add .;
+# git commit -m "Untracked files issue resolved to fix .gitignore";
