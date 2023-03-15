@@ -1,0 +1,183 @@
+\documentclass[11pt]{article}
+\input{Config/inlcude.tex}
+\input{Tools/lt2circuitikz-master/latex_ext.tex}
+\input{Config/Conf.tex}
+\input{Config/macros.tex}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                    % Title Page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{Config/title_page.tex}
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                    % Table of Contents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                    % Part 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Part 1}\label{part1}
+
+Design a satellite communication link operating in the Ku band to meet C/N and link margin specifications.
+
+
+\subsection{Satellite Parameters}\label{Satellite Parameters}
+
+\begin{itemize}
+    \item Antenna gain 25 dB
+    \item Receive system noise temperature 500 K
+    \item Transponder saturated output power in Ku band 40 W
+    \item Transponder bandwidth 36 MHz
+    \item Signals: FM-TV analog signal
+    \item Earth station receiver IF noise bandwidth is 27MHz
+    \item Minimum C/N overall = 12 dB
+    \item Boltzmann’s constant in decibels is k=-228.6dBW/K/Hz
+\end{itemize}
+
+\subsection{UPLINK}\label{UPLINK}
+
+\subsubsection{Q:}
+UPLINK: Design a transmitting earth station (transmitted antenna gain in dB and earth station transmitted power in W) to provide (C/N) up of 35 dB in a Ku-band transponder. Use an uplink antenna with a diameter of 3m and an aperture efficiency of 65\%. The uplink station is located at -2 dB contour of the satellite footprint. Allow 1.5 dB for clear air atmospheric attenuation and other losses. Path length to satellite is 38 500 km. Assume standard frequency allocation of 14GHz for the uplink in Ku-band.
+
+
+\subsubsection{A:}
+
+Antenna: 3m at 65\% aperture efficiency
+Receive: -2dB contour of satellite footprint
+transmitt: C/N of 35db
+transmitted power: 1.5dB for clear air atmospheric attenuation and other losses
+14Ghz for the uplink in Ku-band
+Path length to satellite is 38 500 km
+
+
+* transmitted antenna gain
+
+* transmitted power in What
+
+
+
+\subsection{DOWNLINK}\label{DOWNLINK}
+
+\subsubsection{Q:}
+
+DOWNLINK: Find the power level of the earth station receiver and the antenna gain at the earth receiver station so that overall carrier to noise ratio is 15 dB. Miscellaneous downlink losses are 0.5dB. Earth station is located at -2dB contour of satellite transmitting antenna. The earth station receiver has the following noise temperatures: noise temperature of the input signal is 25K, noise temperature of the RF amplifier is 400K, noise temperature of the mixer is 450 K and the noise temperature of the IFamplifier is 550K. The gain of the RF amplifier is 35 dB, the gain of the mixer is 0dB and the gain of the IF amplifier is 20dB. Assume standard frequency allocation of 11GHz for the downlink in Ku-band.
+
+\subsubsection{A:}
+
+Ku down = 11Ghz
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                    % Part 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Part 2}\label{part2}
+
+\begin{equation}
+    \begin{split}
+        ID &= 20273662\\
+        \therefore K &= 2 + 2 = 4\\
+    \end{split}
+\end{equation}
+
+\subsection{1}
+\subsubsection{Qa}
+A GPS signal is transmitted from an altitude of 20,000 km above the earth’s surface. Calculate the path length assuming an elevation angle of (50 + K) degrees.
+\subsubsection{Aa}
+
+
+
+\subsubsection{Qb}
+How many GNSS satellites are required to achieve a navigation fix in 3 dimensions and why?
+\subsubsection{Ab}
+
+
+
+\subsubsection{Qc}
+What is the main difference between how CDMA is used in communication systems and GNSS systems?
+\subsubsection{Ac}
+
+
+
+\subsubsection{Qd}
+If a GPS C/A code receiver is turned on with no knowledge of its location or any other information provided to it, how long does it typically take to get a navigation fix and why?
+\subsubsection{Ad}
+
+
+
+\subsection{2}
+
+\subsubsection{Qa}
+In no more than 200 words describe the fundamental concept of how a GNSS system works and any technology which enables it?
+\subsubsection{Aa}
+
+
+
+\subsubsection{Qb}
+What is the length (period) of a chip for a the GPS C/A code signal? How much is that in metres?
+\subsubsection{Ab}
+
+
+
+\subsection{3}
+
+\subsubsection{Qa}
+What is the main lobe(s) bandwidth for a GNSS signal modulated with BPSK(K)? and BOC(1,1)?
+\subsubsection{Aa}
+
+
+
+\subsubsection{Qb}
+GPS satellite is moving with a line of sight relative velocity of (K×400)m/s to a receiver.  What is the Doppler shift to the centre frequency caused by this movement on the L1 and L2 signals from the satellite at the receiver?
+\subsubsection{Ab}
+
+
+
+\subsubsection{Qc}
+A 10 MHz TXCO is driving a receiver’s front end and has a frequency deviation of 4 ppm.  It drives a direct downconversion RF front-end mixingthe L2 frequency.  What is the frequency offset at baseband due to the TXCO?
+\subsubsection{Ac}
+
+
+
+\subsection{4}
+
+\subsubsection{Q}
+What are the significant error sources of a GNSS and how they might be mitigated?  Use 200 words or less, a bullet point list with descriptions is acceptable/preferred
+\subsubsection{A}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                    % References
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\addcontentsline{toc}{section}{References}
+\bibliographystyle{IEEEtranN}
+\bibliography{biblist}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                    % Appendix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
+% \appendix
+% \section*{Appendices}\addcontentsline{toc}{section}{Appendices}\label{appendix:main}
+% \renewcommand{\thesubsection}{\Alph{subsection}}
+
+% \subsection{Matlab Code}
+
+% \subsection{LTSpice Code}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+
+
+
+
