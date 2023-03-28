@@ -39,7 +39,7 @@ Design a satellite communication link operating in the Ku band to meet C/N and l
     \item Earth station receiver IF noise bandwidth is 27MHz
     \item Minimum C/N overall = 12 dB
     \item Boltzmann’s constant in decibels is k=-228.6dBW/K/Hz
-\end{itemize}
+\end{itemize} 
 
 \subsection{UPLINK}\label{UPLINK}
 
@@ -49,20 +49,16 @@ UPLINK: Design a transmitting earth station (transmitted antenna gain in dB and 
 
 \subsubsection{A:}
 
-Antenna: 3m at 65\% aperture efficiency
-Receive: -2dB contour of satellite footprint
-transmitt: C/N of 35db
-transmitted power: 1.5dB for clear air atmospheric attenuation and other losses
-14Ghz for the uplink in Ku-band
-Path length to satellite is 38 500 km
+\begin{scriptsize}
+    \inputminted{matlab}{Project/Matlab/UPLINK.m}
+\end{scriptsize}
 
-
-* transmitted antenna gain
-
-* transmitted power in What
-
-
-
+\begin{equation}
+    \begin{split}
+        \text{tx}>=&34.2787W\\
+        \text{antenna} =& 78.6769dB\\
+    \end{split}
+\end{equation}
 \subsection{DOWNLINK}\label{DOWNLINK}
 
 \subsubsection{Q:}
@@ -71,9 +67,17 @@ DOWNLINK: Find the power level of the earth station receiver and the antenna gai
 
 \subsubsection{A:}
 
-Ku down = 11Ghz
+\begin{scriptsize}
+    \inputminted{matlab}{Project/Matlab/DOWNLINK.m}
+\end{scriptsize}
 
-
+% Ku down = 11Ghz
+\begin{equation}
+    \begin{split}
+        \text{Received Power} =& -74.2855dBW\\
+        \text{Antenna Gain} =& 92.1727dB\\
+    \end{split}
+\end{equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                     % Part 2
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -93,25 +97,31 @@ Ku down = 11Ghz
 A GPS signal is transmitted from an altitude of 20,000 km above the earth’s surface. Calculate the path length assuming an elevation angle of (50 + K) degrees.
 \subsubsection{Aa}
 
+\begin{equation}
+\begin{split}
+    R\ &=\ \sqrt{R_{E}^{2}\left(\sin^{2}\left(\theta_{EL}\right)-1\right)+R_{SV}^{2}-R_{E}\sin\left(\theta_{EL}\right)}\\
+    &=\ \sqrt{\left(6378.1^{2}\cdot\left(\sin^{2}\left(52\right)-1\right)\right)+20000^{2}-\left(6378.1\cdot\sin\left(52\right)\right)}\\
+    &= 19288 km
+\end{split}
+\end{equation}
 
 
 \subsubsection{Qb}
 How many GNSS satellites are required to achieve a navigation fix in 3 dimensions and why?
 \subsubsection{Ab}
 
-
+4 satellites. 3 satellites would resolve to 2 possible points in space. If the device was fitted with an atomic clock, this would allow it to work out out which one is correct. However most devices do not have an atomic clock, so a fourth satellite is required.
 
 \subsubsection{Qc}
 What is the main difference between how CDMA is used in communication systems and GNSS systems?
 \subsubsection{Ac}
 
-
-
+communication-based systems are typically synchronous CDMA using orthogonal codes, whereas GNSS uses asynchronous CDMA using pseudo-random noise codes.
 \subsubsection{Qd}
 If a GPS C/A code receiver is turned on with no knowledge of its location or any other information provided to it, how long does it typically take to get a navigation fix and why?
 \subsubsection{Ad}
 
-
+around 15 minutes because it needs to download the ephemerids and almanacs, which contain information about the satellite's orbit and position that is required to perform trilateration. Because the download link is slow, this can take a while, however, is needed before the satellites can be used.
 
 \subsection{2}
 
@@ -119,12 +129,41 @@ If a GPS C/A code receiver is turned on with no knowledge of its location or any
 In no more than 200 words describe the fundamental concept of how a GNSS system works and any technology which enables it?
 \subsubsection{Aa}
 
+Atomic clocks are kept on satellites that keep time very accuratly. Each satellite transmits ephemerids and almanacs that encode the trajectory information of that satellite. The satellites use asynchronous CMDA using pseudo-random noise codes, allowing multiple satellites to transmit simultaneously and identify which signal is from which satellite. 
+
+Each satellite transmits a pulse that is received by the receiver. The distance between the satellite and the receiver can be calculated using  \eqref{eq1}.
+
+\begin{equation}\label{eq1}
+    \text{distance} = \text{speed of light} \cdot \text{time}
+\end{equation}
+
+
+Trilateration is used to estimate the position of a receiver given distance estimations from at least three known points, as shown in \eqref{eqref2}.
+
+\begin{equation}
+    \begin{split}
+        d1 &= c \Delta t_{12} = \sqrt{\left(x_1 - x\right)^2 + \left(y_1 - y\right)^2 + \left(z_1 - z\right)^2}\\
+        d2 &= c \Delta t_{23} = \sqrt{\left(x_2 - x\right)^2 + \left(y_2 - y\right)^2 + \left(z_2 - z\right)^2}\\
+        d3 &= c \Delta t_{31} = \sqrt{\left(x_3 - x\right)^2 + \left(y_3 - y\right)^2 + \left(z_3 - z\right)^2}\\
+    \end{split}\label{eqref2}
+\end{equation}
+
+Where multiple satellites are used with different covariances, a Kalman filter can combine all the data to find the best possible estimate of position. 
 
 
 \subsubsection{Qb}
 What is the length (period) of a chip for a the GPS C/A code signal? How much is that in metres?
 \subsubsection{Ab}
 
+ 1023 chips per ms $\therefore$ 0.977 \mu s per chip.
+
+\begin{equation}
+  \begin{split}
+      \text{distance} &= \text{speed of light} \cdot \text{time}\\
+        &= 299 792 458 \cdot 0.977e-6\\
+        &= 292.9 m
+  \end{split}
+\end{equation}
 
 
 \subsection{3}
@@ -133,19 +172,72 @@ What is the length (period) of a chip for a the GPS C/A code signal? How much is
 What is the main lobe(s) bandwidth for a GNSS signal modulated with BPSK(K)? and BOC(1,1)?
 \subsubsection{Aa}
 
+\begin{equation}
+    \begin{split}
+        f_s & = m \cdot 1.023 \cdot 10^6\\
+        f_c & = n \cdot 1.023 \cdot 10^6\\
+    \end{split}
+\end{equation}
+
+\begin{equation}
+    \begin{split}
+        G^{0}_{BPSK}\left(f_c\right) &= f_{c}\left[\frac{\sin\left(\frac{\pi x}{f_{c}}\right)}{\left(\frac{\pi x}{f_{c}}\right)}\right]^{2}\\
+        G^{0}_{BOC}\left(f_s,f_c\right) &= f_{c}\left[\frac{\sin\left(\frac{\pi x}{f_{c}}\right)\cdot\sin\left(\frac{\pi x}{2f_{s}}\right)}{\pi x\cos\left(\frac{\pi x}{2f_{s}}\right)}\right]^{2}\\
+    \end{split}
+\end{equation}
 
 
+For BPSK(2), the main lobe bandwidth is the carrier frequency for L1 band: 1575.42 MHz. The bandwidth is 8 * chipping rate = 8.184Mhz
+
+for BOC(1,1), the two main lobes are located at 1574.661Mhz and 1576.179Mhz. the bandwidth of the two main lobes is 2 * chipping rate = 2.046Mhz
 \subsubsection{Qb}
 GPS satellite is moving with a line of sight relative velocity of (K×400)m/s to a receiver.  What is the Doppler shift to the centre frequency caused by this movement on the L1 and L2 signals from the satellite at the receiver?
 \subsubsection{Ab}
 
 
+\begin{equation}
+    \begin{split}
+        L1 &= 1575.42 \cdot 10^6\\
+        L2 &= 1227.60 \cdot 10^6\\
+        c &= 299 792 458\\
+        f'&=\frac{f_{0}}{\left(1+\frac{v}{c}\right)}\\
+    \end{split}
+\end{equation}
+
+\begin{equation}
+    \begin{split}
+        v &= 4*-400\text{m/s}\\
+        f'_{L1} &=\frac{1575.42 \cdot 10^6}{\left(1+\frac{4\cdot-400}{299 792 458}\right)}\\
+        f'_{L1} &= 1575.428392 \cdot 10^6\ \text{Hz}\\
+        \therefore\ f'_{L1}-f_0 &= + 8392 \text{Hz}\\
+    \end{split}
+\end{equation}
+
+Hence an increase in the frequency of 8392Hz as the satellite moves towards the receiver.
+
+\begin{equation}
+    \begin{split}
+        v &= 4*-400\text{m/s}\\
+        f'_{L2} &=\frac{1227.60 \cdot 10^6}{\left(1+\frac{4\cdot-400}{299 792 458}\right)}\\
+        f'_{L2} &= 1227.606552 \cdot 10^6\ \text{Hz}\\
+        \therefore\ f'_{L2}-f_0 &= + 6552 \text{Hz}\\
+    \end{split}
+\end{equation}
+
+Hence an increase in the frequency of 6552Hz as the satellite moves towards the receiver.
 
 \subsubsection{Qc}
-A 10 MHz TXCO is driving a receiver’s front end and has a frequency deviation of 4 ppm.  It drives a direct downconversion RF front-end mixingthe L2 frequency.  What is the frequency offset at baseband due to the TXCO?
+A 10 MHz TXCO is driving a receiver’s front end and has a frequency deviation of 4 ppm.  It drives a direct downconversion RF front-end mixing the L2 frequency.  What is the frequency offset at baseband due to the TXCO?
 \subsubsection{Ac}
 
-
+\begin{equation}
+    \begin{split}
+        L2 &= 1227.60 \cdot 10^6\\
+        ppm &= 4\\
+        f_{\text{offset}} &= 1227.60 \cdot 10^6 \cdot 4^{-6} \\
+        &= 4.910 \text{kHz}
+    \end{split}
+\end{equation}
 
 \subsection{4}
 
@@ -153,7 +245,16 @@ A 10 MHz TXCO is driving a receiver’s front end and has a frequency deviation 
 What are the significant error sources of a GNSS and how they might be mitigated?  Use 200 words or less, a bullet point list with descriptions is acceptable/preferred
 \subsubsection{A}
 
-
+\begin{itemize}
+    \item satellites position knowledge: use ephemeris to provide precise orbital trajectory information.
+    \item Ionospheric and Tropospheric delays: the majority is Ionosphere: corrected by transmitting on two frequency's and using the difference in the delay to make corrections.
+    \item Differential GPS (mitigation): DGPs and RTK: DGPs to correct for Ionospheric and Tropospheric delays. RTK additionally uses kinematics to resolve to 1cm accuracy.
+    \item Tracking Errors: Taking long averages and using strong signals can help mitigate this. platform movement can cause tracking errors, where averaging is not appropriate, the sensors can be fused to an inertial system for better accuracy.
+    \item multipathing: This can be mitigated using high bandwidth. Additional receiver mounting considerations can be used to reduce the effect of multipathing.
+    \item blockage and attenuation:  having an unobstructed view of the sky helps mitigate this. If the receiver is next to tall buildings, the GDOP is reduced due to bad geometry. consider mounting on a pole. the moisture content of the air (clouds) can also cause attenuation. 
+    \item number of satellites: more satellites means better accuracy. - use multiband receivers. UBlox F9P really cool. 40+ satellites
+    \item high receiver noise: poor antenna(low gain or out of tune) or poor receiver: increase $C/N_0$ hence fewer sats. use better equipment.
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                     % References
